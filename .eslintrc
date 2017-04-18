@@ -11,7 +11,6 @@
         "no-else-return": 0,
         "new-cap": ["error", {"capIsNewExceptions": ["Router"]}],
         "no-console": 0,
-        "import/no-unresolved": [2, { "commonjs": true}],
         "no-unused-vars": ["error", { "vars": "all", "args": "none" }],
         "no-underscore-dangle": 0,
         "arrow-body-style": 0,
@@ -23,9 +22,20 @@
           0,
           "DebuggerStatement"
         ],
-        "no-debugger": "warn"
+        "no-debugger": "warn",
+        "react/jsx-uses-react": 2,
+        "react/jsx-uses-vars": 2,
+        "react/react-in-jsx-scope": 2,
+        "react/prop-types": 0,
+        "react/jsx-first-prop-new-line": 0,
+        "react/jsx-filename-extension": 0,
+        "import/no-unresolved": [2, { "commonjs": true, "caseSensitive": false}]
     },
+    "plugins": [
+        "react"
+    ],
     "ecmaFeatures": {
-        "modules": true,
+      "jsx": true,
+      "modules": true
     }
 }

@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "immutable": "^3.8.1",
     "jquery": "^3.2.1",
     "lodash.debounce": "^4.0.8",
     "react": "^15.5.4",

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
 import Textarea from 'react-textarea-autosize';
+import marked from 'marked';
 
 class Note extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class Note extends Component {
       );
     } else {
       return (
-        <div>{this.state.text}</div>
+        <div dangerouslySetInnerHTML={{ __html: marked(this.state.text || '') }} />
       );
     }
   }
@@ -86,7 +87,9 @@ class Note extends Component {
               </button>
             </div>
           </div>
-          <div>{this.renderText()}</div>
+          <div>
+            {this.renderText()}
+          </div>
         </div>
       </Draggable>
     );

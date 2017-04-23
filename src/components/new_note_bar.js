@@ -19,7 +19,9 @@ class NewNoteBar extends Component {
         <input onChange={this.onInputChange} value={this.state.newnotetitle}
           placeholder="new note title"
         />
-        <button type="button">Submit</button>
+        <button onClick={() => this.props.onSubmit(this.state.newnotetitle)}>
+          Submit
+        </button>
       </div>
     );
   }

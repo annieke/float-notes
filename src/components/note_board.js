@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Immutable from 'immutable';
+import NewNoteBar from './new_note_bar';
 import Note from './note';
 
 class NoteBoard extends Component {
@@ -8,6 +9,7 @@ class NoteBoard extends Component {
 
     const initMap = {
       1: {
+        id: 1,
         title: 'hi',
         text: 'hellooooo',
         x: 0,
@@ -15,6 +17,7 @@ class NoteBoard extends Component {
         zIndex: 0,
       },
       2: {
+        id: 2,
         title: 'banana',
         text: 'apple',
         x: 10,
@@ -25,7 +28,25 @@ class NoteBoard extends Component {
 
     this.state = {
       notes: Immutable.Map(initMap),
+      currID: 3,
     };
+
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(notetitle) {
+    const newnote = {
+      id: this.state.currID,
+      title: notetitle,
+      text: '',
+      x: 0,
+      y: 0,
+      zIndex: this.state.currID,
+    };
+    this.setState({
+      notes: this.state.notes.set(this.state.currID, newnote),
+    });
+    this.state.currID += 1;
   }
 
   render() {
@@ -35,6 +56,7 @@ class NoteBoard extends Component {
 
     return (
       <div>
+        <NewNoteBar onSubmit={this.onSubmit} />
         {noteboard}
       </div>
     );

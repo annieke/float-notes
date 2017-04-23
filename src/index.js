@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import NewNoteBar from './components/new_note_bar';
 import NoteBoard from './components/note_board';
+import './style.scss';
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +16,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NewNoteBar />
         <NoteBoard />
       </div>
     );

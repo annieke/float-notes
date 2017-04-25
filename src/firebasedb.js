@@ -14,12 +14,31 @@ firebase.initializeApp(config);
 // Get a reference to the database service
 const database = firebase.database();
 
+// for creating boards
 export function createBoard(callback) {
-  return (database.ref().child('boards').push().key);
+  return (database.ref().child('noteboardIDs').push().key);
 }
 
-export function fetchNoteBoards(callback) {
-  firebase.database().ref('noteboards').on('value', (snapshot) => {
-    //
+export function fetchNoteBoardIDs(callback) {
+  database.ref('noteboardIDs').on('value', (snapshot) => {
+    callback(snapshot.val());
   });
+}
+
+export function fetchNoteBoard(boardID, callback) {
+  database.ref(boardID).on('value', (snapshot) => {
+    callback(snapshot.val());
+  });
+}
+
+export function removeNote(boardID, id, callback) {
+  database.ref(boardID).child(id).remove();
+}
+
+export function addNote(boardID, newnote, callback) {
+  database.ref(boardID).push(newnote);
+}
+
+export function editNote(boardID, id, updatednote, callback) {
+  database.ref(boardID).child(id).set(updatednote);
 }

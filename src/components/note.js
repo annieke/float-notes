@@ -8,7 +8,6 @@ class Note extends Component {
     super(props);
 
     this.state = {
-      id: props.note.id,
       title: props.note.title,
       text: props.note.text,
       onDelete: props.onDelete,
@@ -60,7 +59,7 @@ class Note extends Component {
             <div className="title-container">
               <div className="note-title">{this.state.title}</div>
               <div>
-                <button onClick={() => this.state.onDelete(this.state.id)}>
+                <button onClick={() => this.state.onDelete(this.props.id)}>
                   <i className="fa fa-trash" aria-hidden="true" />
                 </button>
                 <button onClick={() => {
@@ -69,8 +68,8 @@ class Note extends Component {
                   } else {
                     this.state.isEditing = false;
                     const IDtext = {
-                      id: this.state.id,
-                      text: this.state.text,
+                      id: this.props.id,
+                      text: this.props.note.text,
                     };
                     this.state.onDoneEdit(IDtext);
                   }

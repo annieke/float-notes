@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Immutable from 'immutable';
 import NoteBoard from './components/note_board';
-import * as firebasedb from '../firebasedb';
+import * as firebasedb from './firebasedb';
 import './style.scss';
 
 class App extends Component {
@@ -10,39 +10,28 @@ class App extends Component {
     super(props);
 
     this.state = {
-      noteboards: Immutable.Map(),
-      currentBoardID: 0,
+      noteboardIDs: Immutable.List(),
+      currentBoardID: 'default',
     };
-    this.renderNoteboard = this.renderNoteboard.bind(this);
   }
 
   componentDidMount() {
-    firebasedb.fetchNotes();
-  }
-
-  createNote() {
-    if (this.state.noteboards.size > 0) {
-      this.setState({ currentBoardID: firebasedb.createBoard() });
-    }
-    // createNOte
-  }
-
-  renderNoteboard() {
-    if (this.state.noteboards.size > 0) {
-      return <NoteBoard id={this.state.currentBoardID} />;
-    } else {
-      return null;
-    }
+    firebasedb.fetchNoteBoardIDs((noteboardIDs) => {
+      this.setState({ noteboardIDs: Immutable.List(noteboardIDs) });
+    });
   }
 
   renderNoteboardButtons() {
+    console.log(this.state);
     // renders buttons that let you select which noteboard
+    // list which noteboard ids exist
+    // always have default option
   }
 
   render() {
     return (
       <div>
-        {this.renderNoteboard()}
+        <NoteBoard id={this.state.currentBoardID} />
       </div>
     );
   }

@@ -50,7 +50,7 @@ class NoteBoard extends Component {
 
   render() {
     const noteboard = this.state.notes.entrySeq().map(([id, note]) => {
-      return (<Note id={id} key={id} note={note}
+      return (<Note key={id} id={id} note={note}
         onDelete={this.onDelete} onDoneEdit={this.onDoneEdit}
       />);
     });

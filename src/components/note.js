@@ -10,10 +10,15 @@ class Note extends Component {
     this.state = {
       title: props.note.title,
       text: props.note.text,
+      x: props.note.x,
+      y: props.note.y,
       isEditing: false,
     };
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
+    this.onStartDrag = this.onStartDrag.bind(this);
+    this.onDrag = this.onDrag.bind(this);
+    this.onStopDrag = this.onStopDrag.bind(this);
   }
 
   onTextChange(event) {
@@ -22,6 +27,30 @@ class Note extends Component {
 
   onTitleChange(event) {
     this.setState({ title: event.target.value });
+  }
+
+  onStartDrag(e, ui) {
+    const newpos = {
+      x: ui.x,
+      y: ui.y,
+    };
+    this.props.onDoneEdit(this.props.id, newpos);
+  }
+
+  onDrag(e, ui) {
+    const newpos = {
+      x: ui.x,
+      y: ui.y,
+    };
+    this.props.onDoneEdit(this.props.id, newpos);
+  }
+
+  onStopDrag(e, ui) {
+    const newpos = {
+      x: ui.x,
+      y: ui.y,
+    };
+    this.props.onDoneEdit(this.props.id, newpos);
   }
 
   editToggle() {
@@ -66,10 +95,10 @@ class Note extends Component {
         handle=".drag-button"
         grid={[25, 25]}
         defaultPosition={{ x: 20, y: 20 }}
-        position={null}
-        onStart={Draggable.handleStart}
-        onDrag={Draggable.handleDrag}
-        onStop={Draggable.handleStop}
+        position={{ x: this.props.note.x, y: this.props.note.y }}
+        onStart={this.onStartDrag}
+        onDrag={this.onDrag}
+        onStop={this.onStopDrag}
       >
         <div className="note">
           <div className="row">

@@ -105,21 +105,24 @@ class Note extends Component {
             <div className="title-container">
               {this.renderTitle()}
               <div>
-                <button onClick={() => this.props.onDelete(this.props.id)}>
+                <button className="ui icon button"
+                  onClick={() => this.props.onDelete(this.props.id)}
+                >
                   <i className="fa fa-trash" aria-hidden="true" />
                 </button>
-                <button onClick={() => {
-                  if (!this.state.isEditing) {
-                    this.setState({ isEditing: true });
-                  } else {
-                    this.state.isEditing = false;
-                    const newtitletext = {
-                      title: this.state.title,
-                      text: this.state.text,
-                    };
-                    this.props.onDoneEdit(this.props.id, newtitletext);
-                  }
-                }}
+                <button className="ui icon button"
+                  onClick={() => {
+                    if (!this.state.isEditing) {
+                      this.setState({ isEditing: true });
+                    } else {
+                      this.state.isEditing = false;
+                      const newtitletext = {
+                        title: this.state.title,
+                        text: this.state.text,
+                      };
+                      this.props.onDoneEdit(this.props.id, newtitletext);
+                    }
+                  }}
                 >
                   {this.editToggle()}
                 </button>
@@ -127,7 +130,7 @@ class Note extends Component {
             </div>
 
             <div>
-              <button className="drag-button">
+              <button className="ui icon button drag-button">
                 <i className="fa fa-arrows-alt" aria-hidden="true" />
               </button>
             </div>

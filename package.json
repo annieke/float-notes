@@ -54,6 +54,7 @@
     "react-dom": "^15.5.4",
     "react-draggable": "^2.2.3",
     "react-router": "^4.1.1",
-    "react-textarea-autosize": "^4.0.5"
+    "react-textarea-autosize": "^4.0.5",
+    "semantic-ui-react": "^0.68.2"
   }
 }

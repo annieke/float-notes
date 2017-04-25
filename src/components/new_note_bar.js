@@ -15,13 +15,17 @@ class NewNoteBar extends Component {
 
   render() {
     return (
-      <div>
-        <input onChange={this.onInputChange} value={this.state.newnotetitle}
-          placeholder="new note title"
-        />
-        <button onClick={() => this.props.onSubmit(this.state.newnotetitle)}>
+      <div className="header">
+        <div className="ui action input new-note-bar">
+          <input onChange={this.onInputChange} value={this.state.newnotetitle}
+            placeholder="new note title"
+          />
+          <button className="ui primary button"
+            onClick={() => this.props.onSubmit(this.state.newnotetitle)}
+          >
           Submit
         </button>
+        </div>
       </div>
     );
   }

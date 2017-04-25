@@ -3,6 +3,19 @@ body {
   background: rgb(232, 232, 232);
 }
 
+.header {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  display: flex;
+  justify-content: center;
+}
+
+.new-note-bar {
+  width: 90%;
+}
+
 .note {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   border-radius: 3px;
@@ -22,9 +35,11 @@ body {
 .title-container {
   display: flex;
   flex-direction: row;
+  align-items: center;
   padding-right: 20px;
 }
 
 .note-title {
   padding-right: 10px;
+  font-size: 22px;
 }

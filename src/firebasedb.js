@@ -39,6 +39,6 @@ export function addNote(boardID, newnote, callback) {
   database.ref(boardID).push(newnote);
 }
 
-export function editNote(boardID, id, updatednote, callback) {
-  database.ref(boardID).child(id).set(updatednote);
+export function editNote(boardID, id, updates, callback) {
+  database.ref(boardID).child(id).update(updates);
 }

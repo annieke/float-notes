@@ -38,14 +38,9 @@ class NoteBoard extends Component {
     firebasedb.removeNote(this.props.id, id);
   }
 
-  onDoneEdit(IDtext) {
-    this.setState({
-      notes: this.state.notes.update(IDtext.id, (n) => {
-        return Object.assign({}, n, IDtext);
-      }),
-    });
-    const updatednote = this.state.notes.get(IDtext.id);
-    firebasedb.editNote(this.props.id, IDtext.id, updatednote);
+  onDoneEdit(id, newtitletext) {
+    const updates = newtitletext;
+    firebasedb.editNote(this.props.id, id, updates);
   }
 
   render() {

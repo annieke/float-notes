@@ -10,15 +10,18 @@ class Note extends Component {
     this.state = {
       title: props.note.title,
       text: props.note.text,
-      onDelete: props.onDelete,
-      onDoneEdit: props.onDoneEdit,
       isEditing: false,
     };
-    this.onInputChange = this.onInputChange.bind(this);
+    this.onTitleChange = this.onTitleChange.bind(this);
+    this.onTextChange = this.onTextChange.bind(this);
   }
 
-  onInputChange(event) {
+  onTextChange(event) {
     this.setState({ text: event.target.value });
+  }
+
+  onTitleChange(event) {
+    this.setState({ title: event.target.value });
   }
 
   editToggle() {
@@ -29,16 +32,30 @@ class Note extends Component {
     }
   }
 
-  renderText() {
+  renderTitle() {
     if (this.state.isEditing) {
       return (
         <div>
-          <Textarea onChange={this.onInputChange} value={this.state.text} />
+          <Textarea onChange={this.onTitleChange} value={this.state.title} />
         </div>
       );
     } else {
       return (
-        <div dangerouslySetInnerHTML={{ __html: marked(this.state.text || '') }} />
+        <div className="note-title">{this.props.note.title}</div>
+      );
+    }
+  }
+
+  renderText() {
+    if (this.state.isEditing) {
+      return (
+        <div>
+          <Textarea onChange={this.onTextChange} value={this.state.text} />
+        </div>
+      );
+    } else {
+      return (
+        <div dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />
       );
     }
   }
@@ -57,9 +74,9 @@ class Note extends Component {
         <div className="note">
           <div className="row">
             <div className="title-container">
-              <div className="note-title">{this.state.title}</div>
+              {this.renderTitle()}
               <div>
-                <button onClick={() => this.state.onDelete(this.props.id)}>
+                <button onClick={() => this.props.onDelete(this.props.id)}>
                   <i className="fa fa-trash" aria-hidden="true" />
                 </button>
                 <button onClick={() => {
@@ -67,11 +84,11 @@ class Note extends Component {
                     this.setState({ isEditing: true });
                   } else {
                     this.state.isEditing = false;
-                    const IDtext = {
-                      id: this.props.id,
-                      text: this.props.note.text,
+                    const newtitletext = {
+                      title: this.state.title,
+                      text: this.state.text,
                     };
-                    this.state.onDoneEdit(IDtext);
+                    this.props.onDoneEdit(this.props.id, newtitletext);
                   }
                 }}
                 >

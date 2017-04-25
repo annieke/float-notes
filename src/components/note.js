@@ -105,17 +105,17 @@ class Note extends Component {
             <div className="title-container">
               {this.renderTitle()}
               <div>
-                <button className="ui icon button"
+                <button className="ui circular icon button"
                   onClick={() => this.props.onDelete(this.props.id)}
                 >
                   <i className="fa fa-trash" aria-hidden="true" />
                 </button>
-                <button className="ui icon button"
+                <button className="ui circular icon button"
                   onClick={() => {
                     if (!this.state.isEditing) {
                       this.setState({ isEditing: true });
                     } else {
-                      this.state.isEditing = false;
+                      this.setState({ isEditing: false });
                       const newtitletext = {
                         title: this.state.title,
                         text: this.state.text,
@@ -130,12 +130,12 @@ class Note extends Component {
             </div>
 
             <div>
-              <button className="ui icon button drag-button">
+              <button className="ui circular icon button drag-button">
                 <i className="fa fa-arrows-alt" aria-hidden="true" />
               </button>
             </div>
           </div>
-          <div>
+          <div className="text">
             {this.renderText()}
           </div>
         </div>

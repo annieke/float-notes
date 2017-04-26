@@ -14,9 +14,12 @@ firebase.initializeApp(config);
 // Get a reference to the database service
 const database = firebase.database();
 
-// for creating boards
 export function createBoard(callback) {
   return (database.ref().child('noteboardIDs').push().key);
+}
+
+export function nameBoard(boardID, name, callback) {
+  database.ref('noteboardIDs').child(boardID).update(name);
 }
 
 export function fetchNoteBoardIDs(callback) {

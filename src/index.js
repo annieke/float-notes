@@ -11,27 +11,40 @@ class App extends Component {
     super(props);
 
     this.state = {
-      noteboardIDs: Immutable.List(),
+      noteboardIDs: Immutable.Map(),
       currentBoardID: 'default',
     };
   }
 
   componentDidMount() {
     firebasedb.fetchNoteBoardIDs((noteboardIDs) => {
-      this.setState({ noteboardIDs: Immutable.List(noteboardIDs) });
+      this.setState({ noteboardIDs: Immutable.Map(noteboardIDs) });
     });
   }
 
+  addNewBoard() {
+    const newboardID = firebasedb.createBoard();
+    const boardinfo = {
+      name: this.state.noteboardIDs.size + 1,
+    };
+    firebasedb.nameBoard(newboardID, boardinfo);
+  }
+
   renderNoteboardsMenu() {
-    console.log(this.state);
-    // renders buttons that let you select which noteboard
-    // list which noteboard ids exist
-    // always have default option
+    const noteboards = this.state.noteboardIDs.entrySeq().map(([id, noteboard]) => {
+      return (<Menu.Item key={id} id={id} name={noteboard.name.toString()}
+        active={this.state.currentBoardID === id}
+        onClick={() => this.setState({ currentBoardID: id })}
+      />);
+    });
     return (
       <div className="top-menu">
         <Menu secondary>
-          <Menu.Item name="default" active={this.state.currentBoardID === 'default'} />
-          <Menu.Item name="add board" />
+          <Menu.Item name="default" active={this.state.currentBoardID === 'default'}
+            onClick={() => this.setState({ currentBoardID: 'default' })}
+          />
+          {noteboards}
+          <Menu.Item name="add board" onClick={() => this.addNewBoard()} />
         </Menu>
       </div>
     );
@@ -41,7 +54,7 @@ class App extends Component {
     return (
       <div>
         {this.renderNoteboardsMenu()}
-        <NoteBoard id={this.state.currentBoardID} />
+        <NoteBoard key={this.state.currentBoardID} id={this.state.currentBoardID} />
       </div>
     );
   }

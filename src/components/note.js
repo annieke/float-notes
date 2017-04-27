@@ -21,6 +21,13 @@ class Note extends Component {
     this.onStopDrag = this.onStopDrag.bind(this);
   }
 
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      title: newProps.note.title,
+      text: newProps.note.text,
+    });
+  }
+
   onTextChange(event) {
     this.setState({ text: event.target.value });
   }
